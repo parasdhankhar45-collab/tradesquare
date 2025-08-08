@@ -12,6 +12,11 @@ const { OrdersModel } = require("./model/OrdersModel");
 
 const PORT = process.env.PORT || 3006;
 const uri = process.env.MONGO_URL;
+app.get("/", (req, res) => {
+  res.send("Backend is running!");
+});
+
+
 
 const app = express();
 

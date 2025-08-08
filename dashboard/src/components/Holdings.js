@@ -5,6 +5,23 @@ import { VerticalGraph } from "./VerticalGraph";
 const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
 
+useEffect(() => {
+    axios
+      .get("https://backened-m3gv.onrender.com/allHoldings")
+      .then((res) => {
+        if (Array.isArray(res.data)) {
+          setAllHoldings(res.data);
+        } else {
+          console.error("Unexpected response format:", res.data);
+          setAllHoldings([]);
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching holdings:", err);
+        setAllHoldings([]);
+      });
+  }, []);
+
   useEffect(() => {
     axios
       .get("http://localhost:3006/allHoldings")
