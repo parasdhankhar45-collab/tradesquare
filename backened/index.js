@@ -58,7 +58,7 @@ app.post("/newOrder", async (req, res) => {
 });
 
 // ✅ Catch-all route for React Router
-app.get("/*", (req, res) => {
+app.get("/{*}", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
 });
 
