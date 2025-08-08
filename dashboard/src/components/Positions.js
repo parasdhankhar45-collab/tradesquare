@@ -5,7 +5,7 @@ import axios from "axios";
 const Positions = () => {const [allPositions, setAllPositions] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3006/allPositions").then((res)=>{
+    axios.get("https://backened-m3gv.onrender.com/allPositions").then((res)=>{
       console.log(res.data);
     setAllPositions(res.data)});
   }, []);
