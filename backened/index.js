@@ -11,7 +11,10 @@ const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
 
 const PORT = process.env.PORT || 3002;
-const uri = process.env.MONGO_URL;
+const API_BASE_URL = "https://your-backend.onrender.com";
+fetch(`${API_BASE_URL}/api/orders`)
+  .then(res => res.json())
+  .then(data => console.log(data));
 
 const app = express();
 
