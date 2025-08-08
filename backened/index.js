@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
 
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
@@ -15,15 +16,13 @@ const uri = process.env.MONGO_URL;
 const app = express();
 
 // Middleware
-app.use(cors()); // You can restrict origin if needed
+app.use(cors());
 app.use(bodyParser.json());
 
-// ✅ Root route for sanity check
-app.get("/", (req, res) => {
-  res.send("Backend is running!");
-});
+// ✅ Serve React frontend
+app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-// ✅ Get all holdings
+// ✅ API Routes
 app.get("/allHoldings", async (req, res) => {
   try {
     const allHoldings = await HoldingsModel.find({});
@@ -33,7 +32,6 @@ app.get("/allHoldings", async (req, res) => {
   }
 });
 
-// ✅ Get all positions
 app.get("/allPositions", async (req, res) => {
   try {
     const allPositions = await PositionsModel.find({});
@@ -43,7 +41,6 @@ app.get("/allPositions", async (req, res) => {
   }
 });
 
-// ✅ Add new order
 app.post("/newOrder", async (req, res) => {
   try {
     const newOrder = new OrdersModel({
@@ -58,6 +55,11 @@ app.post("/newOrder", async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: "Failed to save order" });
   }
+});
+
+// ✅ Catch-all route for React Router
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
 });
 
 // ✅ Start server and connect to DB
