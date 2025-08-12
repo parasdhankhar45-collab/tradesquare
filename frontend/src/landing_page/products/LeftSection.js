@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function LeftSection({
   imageURL,
   productName,
-  productDesription,
+  productDescription,
   tryDemo,
   learnMore,
   googlePlay,
@@ -17,7 +18,7 @@ function LeftSection({
         </div>
         <div className="col-6 p-5 mt-5">
           <h1>{productName}</h1>
-          <p>{productDesription}</p>
+          <p>{productDescription}</p>
           <div>
             <a href={tryDemo}>Try Demo</a>
             <a href={learnMore} style={{ marginLeft: "50px" }}>
@@ -37,8 +38,7 @@ function LeftSection({
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>)
 }
 
 export default LeftSection;
